@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=4 uid="uid://dpa0r5onwowg"]
+
+[ext_resource type="PackedScene" uid="uid://2ni4rk542blr" path="res://scenes/player.tscn" id="1_eej56"]
+[ext_resource type="Script" path="res://scripts/game_manage.gd" id="1_rgttw"]
+[ext_resource type="Texture2D" uid="uid://d0egvye5o8ldv" path="res://assets/background.png" id="2_cn6oe"]
+[ext_resource type="Texture2D" uid="uid://dyj5dhf5vn32j" path="res://assets/sprites/tail/小草砖.png" id="2_wtgp5"]
+[ext_resource type="PackedScene" uid="uid://d4a7vaq5wcomv" path="res://scenes/tile_map_layer_old.tscn" id="3_l0u6u"]
+[ext_resource type="PackedScene" uid="uid://dgm4qehimbju0" path="res://scenes/kill_area.tscn" id="3_py6tk"]
+[ext_resource type="PackedScene" uid="uid://dg5mhoc3bklua" path="res://scenes/coin.tscn" id="4_ukyv1"]
+[ext_resource type="PackedScene" uid="uid://dlnq6pdi3kupo" path="res://scenes/pannel.tscn" id="6_pajj0"]
+[ext_resource type="Script" path="res://scripts/pannel.gd" id="7_boc8d"]
+[ext_resource type="PackedScene" uid="uid://wjxfwju2050v" path="res://scenes/box_obstacle.tscn" id="8_hw7iy"]
+[ext_resource type="PackedScene" uid="uid://dp5hy5exhawju" path="res://scenes/npc.tscn" id="9_5lypr"]
+[ext_resource type="PackedScene" uid="uid://c02yv31wj4nqk" path="res://scenes/ice_box.tscn" id="12_r7sye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hirkt"]
+size = Vector2(10, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_io42d"]
+size = Vector2(20, 10)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7l06x"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManage" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_rgttw")
+ice_box_scene = ExtResource("12_r7sye")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(16, -16)
+texture = ExtResource("2_cn6oe")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="TailMap" type="Node" parent="."]
+
+[node name="TileMapLayer" parent="." instance=ExtResource("3_l0u6u")]
+tile_map_data = PackedByteArray("AAD7/wEAAAACAAEAAAD8/wEAAAACAAEAAAD9/wEAAAACAAEAAAD+/wEAAAACAAEAAAD//wEAAAACAAEAAAAAAAEAAAACAAEAAAABAAEAAAACAAEAAAD7/wAAAAACAAAAAAD8/wAAAAACAAAAAAD9/wAAAAACAAAAAAD+/wAAAAACAAAAAAD//wAAAAACAAAAAAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAADAP//AAACAAAAAAAEAP//AAACAAAAAAAFAP//AAACAAAAAAAGAP//AAACAAAAAAAHAP//AAACAAAAAAAIAP//AAACAAAAAAAJAP//AAACAAAAAAAKAP//AAACAAAAAAALAP//AAACAAAAAAAMAP//AAACAAAAAAANAP//AAACAAAAAAARAP//AAACAAAAAAASAP//AAACAAAAAAATAP//AAACAAAAAAAUAP//AAACAAAAAAANAAAAAAACAAEAAAANAAEAAAACAAEAAAARAAAAAAACAAEAAAARAAEAAAACAAEAAAD6/wAAAAACAAAAAAD5/wAAAAACAAAAAAA=")
+
+[node name="ci" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(241, 0)
+texture = ExtResource("2_wtgp5")
+region_enabled = true
+region_rect = Rect2(127, 1.25, 33, 32.75)
+
+[node name="KillArea" parent="TileMapLayer/ci" instance=ExtResource("3_py6tk")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TileMapLayer/ci/KillArea"]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_hirkt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/ci/KillArea"]
+position = Vector2(-13, -1)
+shape = SubResource("RectangleShape2D_hirkt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TileMapLayer/ci/KillArea"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_io42d")
+
+[node name="Player" parent="." instance=ExtResource("1_eej56")]
+unique_name_in_owner = true
+position = Vector2(8, -8)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
+[node name="Pannel" parent="Player/Camera2D" instance=ExtResource("6_pajj0")]
+position = Vector2(81.7426, 108.99)
+script = ExtResource("7_boc8d")
+
+[node name="Coin" parent="." instance=ExtResource("4_ukyv1")]
+position = Vector2(200, -32)
+
+[node name="BoxObstacle" parent="." instance=ExtResource("8_hw7iy")]
+position = Vector2(168, -24)
+
+[node name="KillArea" parent="." instance=ExtResource("3_py6tk")]
+position = Vector2(-73, 52)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]
+shape = SubResource("WorldBoundaryShape2D_7l06x")
+
+[node name="npc" type="Node" parent="."]
+
+[node name="happy" parent="npc" instance=ExtResource("9_5lypr")]
+position = Vector2(-40, -8)
+
+[node name="angry" parent="npc" instance=ExtResource("9_5lypr")]
+position = Vector2(-72, -8)
+status_type = "angry"
+
+[node name="sad" parent="npc" instance=ExtResource("9_5lypr")]
+position = Vector2(72, -24)
+status_type = "sad"
+
+[node name="fear" parent="npc" instance=ExtResource("9_5lypr")]
+position = Vector2(120, -24)
+status_type = "fear"

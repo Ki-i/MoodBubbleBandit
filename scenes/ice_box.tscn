@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c02yv31wj4nqk"]
+
+[ext_resource type="Texture2D" uid="uid://cweysnly7sgxb" path="res://assets/sprites/world_tileset.png" id="1_t7k6y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6ctr"]
+size = Vector2(16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqeph"]
+atlas = ExtResource("1_t7k6y")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgxtq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqeph")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="IceBox" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_y6ctr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rgxtq")

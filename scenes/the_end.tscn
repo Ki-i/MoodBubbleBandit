@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://u5pgfnjxv3ja"]
+
+[ext_resource type="PackedScene" uid="uid://dlnq6pdi3kupo" path="res://scenes/pannel.tscn" id="1_iqmah"]
+[ext_resource type="Texture2D" uid="uid://dsjjl7rvmok02" path="res://assets/background2.png" id="2_5hli5"]
+
+[node name="TheEend" type="CharacterBody2D"]
+
+[node name="Pannel" parent="." instance=ExtResource("1_iqmah")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5hli5")

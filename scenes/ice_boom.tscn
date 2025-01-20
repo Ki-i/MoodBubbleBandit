@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://de0kujbnp6r02"]
+
+[ext_resource type="Texture2D" uid="uid://dyuuih2wyi6jd" path="res://assets/sprites/fruit.png" id="1_emkxv"]
+[ext_resource type="Script" path="res://scripts/ice_boom.gd" id="1_ysrli"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wxvm"]
+atlas = ExtResource("1_emkxv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_12w7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wxvm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aoolh"]
+size = Vector2(10, 10)
+
+[node name="IceBoom" type="Area2D" groups=["iceBoom"]]
+script = ExtResource("1_ysrli")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_12w7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aoolh")
