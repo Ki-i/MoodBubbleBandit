@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlnq6pdi3kupo"]
+
+[ext_resource type="PackedScene" uid="uid://ja3m7q7qpvlt" path="res://scenes/bubble_pannel.tscn" id="1_3qmii"]
+[ext_resource type="Script" path="res://scripts/pannel.gd" id="1_77x8x"]
+[ext_resource type="FontFile" uid="uid://drljns2yrs1tr" path="res://assets/fonts/PixelOperator8.ttf" id="2_as3is"]
+
+[node name="Pannel" type="Area2D"]
+script = ExtResource("1_77x8x")
+
+[node name="happy" parent="." instance=ExtResource("1_3qmii")]
+position = Vector2(-176, 120)
+
+[node name="angry" parent="." instance=ExtResource("1_3qmii")]
+position = Vector2(-112, 120)
+bubble_name = "angry"
+
+[node name="sad" parent="." instance=ExtResource("1_3qmii")]
+position = Vector2(-56, 120)
+bubble_name = "sad"
+
+[node name="fear" parent="." instance=ExtResource("1_3qmii")]
+position = Vector2(8, 120)
+bubble_name = "fear"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = -320.0
+offset_top = -128.0
+offset_right = -271.0
+offset_bottom = -105.0
+theme_override_fonts/font = ExtResource("2_as3is")
+theme_override_font_sizes/font_size = 8
+text = "Score:"
+metadata/_edit_use_anchors_ = true

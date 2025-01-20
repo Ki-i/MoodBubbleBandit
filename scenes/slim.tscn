@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://bddrwa05xkpcm"]
+
+[ext_resource type="Script" path="res://slim.gd" id="1_2h6cg"]
+[ext_resource type="PackedScene" uid="uid://dgm4qehimbju0" path="res://scenes/kill_area.tscn" id="1_owxrc"]
+[ext_resource type="Texture2D" uid="uid://brqbbh38hh5mb" path="res://assets/sprites/章鱼.png" id="2_4ou2m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r4mg"]
+atlas = ExtResource("2_4ou2m")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulm0j"]
+atlas = ExtResource("2_4ou2m")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cbfi"]
+atlas = ExtResource("2_4ou2m")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5dkk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r4mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulm0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cbfi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m8xi"]
+size = Vector2(34, 9)
+
+[node name="Slim" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_2h6cg")
+
+[node name="KillArea" parent="." instance=ExtResource("1_owxrc")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="KillArea"]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_o5dkk")
+autoplay = "default"
+frame_progress = 0.159658
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]
+position = Vector2(1, 5.5)
+shape = SubResource("RectangleShape2D_7m8xi")
+
+[node name="RayCastRight" type="RayCast2D" parent="KillArea"]
+position = Vector2(0, 5)
+target_position = Vector2(10, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="KillArea"]
+position = Vector2(0, 5)
+target_position = Vector2(-11, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

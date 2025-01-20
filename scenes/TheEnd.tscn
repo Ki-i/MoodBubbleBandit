@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://noox77pxc6y6"]
+
+[ext_resource type="Script" path="res://scripts/the_end.gd" id="1_r1bca"]
+[ext_resource type="Texture2D" uid="uid://c6k45ps2qk7eq" path="res://assets/封面背景.png" id="2_dvs0w"]
+[ext_resource type="PackedScene" uid="uid://dm8kx1s8sqibw" path="res://scenes/EndActor.tscn" id="2_s8avw"]
+[ext_resource type="AudioStream" uid="uid://1qorys1qsl71" path="res://assets/music/player/game.mp3" id="3_qouey"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_r1bca")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dvs0w")
+
+[node name="EndActor" parent="." instance=ExtResource("2_s8avw")]
+position = Vector2(-16, 1)
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 72)
+stream = ExtResource("3_qouey")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1.13011, 1.00551)
+zoom = Vector2(20, 20)
